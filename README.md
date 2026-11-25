@@ -1,4 +1,4 @@
-# Analysis of Algorithmic Variations and Enhancement of VillageNet in Unsupervised Clustering
+# Modular Evaluation and Enhancement of VillageNet for Unsupervised Clustering
 
 **Author:** Arthur Santos  
 **Institution:** Department of Computer Science (DCOMP) — Federal University of São João del-Rei (UFSJ)
