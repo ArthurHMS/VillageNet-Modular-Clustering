@@ -1,0 +1,60 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{indentfirst}
+\usepackage[numbers]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    pdftitle={Modular Evaluation and Enhancement of VillageNet for Unsupervised Clustering},
+    pdfauthor={Arthur Henrique Moreira Santos}
+}
+\title{\textbf{Modular Evaluation and Enhancement of VillageNet for Unsupervised Clustering}}
+\author{Arthur Henrique Moreira Santos \\ \small UFSJ}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Related Work}
+
+Unsupervised clustering in complex and biomedical datasets has driven the development of graph-based approaches capable of handling high dimensionality and nonlinear 
+boundaries without requiring the number of clusters ($k$) to be specified a priori. In this context, the foundational work for this research is \citet{ballal2026villagenet}, 
+who introduced the \textbf{VillageNet} algorithm. The authors demonstrated that traditional methods based on $k$-nearest neighbor ($k$-NN) graphs combined with modularity 
+optimization, such as the \textbf{Louvain} algorithm \citep{blondel2008louvain}, suffer from distance concentration in high-dimensional spaces and tend to over-fragment 
+the data. To overcome this limitation, VillageNet partitions the feature space into locally linear subregions (Voronoi cells) and applies the random-walk-based community 
+detector \textbf{WLCF} \citep{ballal2022wlcf} over the reduced inter-village graph, achieving linear time complexity and outperforming classical methods on both general 
+and medical benchmarks.
+
+Despite VillageNet's efficiency, its initial partitioning stage relies on the classical \textbf{K-Means} algorithm \citep{macqueen1967some} with a single random 
+initialization and Euclidean distance, making it sensitive to local minima and outliers. In the partitional clustering literature, several extensions have been 
+proposed to address these issues and serve as the foundation for the variations investigated in this study. \citet{arthur2007kmeanspp} introduced \textbf{K-Means++}, a
+ probabilistic seeding method that distributes initial centroids more effectively, reducing variance and improving clustering accuracy. Aiming at scalability for 
+ large-scale datasets, \citet{sculley2010minibatch} proposed \textbf{MiniBatch K-Means}, which updates centroids using small random batches, substantially reducing 
+ computational cost with minimal loss in quality. For noisy scenarios, \citet{ng2002clarans} consolidated medoid-based algorithms (\textbf{K-Medoids / CLARANS}), which 
+ select actual data points as cluster centers, providing greater robustness against extreme values frequently encountered in clinical records.
+
+Regarding the community detection stage on weighted graphs, the literature offers well-established alternatives to WLCF that can be explored on the reduced inter-village 
+graph. \citet{traag2019leiden} proposed the \textbf{Leiden} algorithm as a direct refinement of Louvain, resolving the issue of internally disconnected communities while 
+ensuring faster convergence and well-connected partitions. Following a premise similar to WLCF---based on random walks---\citet{rosvall2008infomap} developed \textbf{Infomap}, 
+which identifies communities by minimizing the description length of information flow across the network via the map equation. Finally, \citet{dhillon2004spectral} 
+established the equivalence between \textbf{Spectral Clustering} and normalized graph cuts, a technique widely used to capture non-convex structures through the 
+eigenvectors of the Laplacian matrix, whose computational cost becomes tractable when applied to the reduced graph of villages.
+
+Unlike the original study by \citet{ballal2026villagenet}, which validates VillageNet's fixed architecture by comparing it externally against other clustering algorithms, 
+this work focuses on the modular evaluation and optimization of VillageNet's internal structure. By systematically integrating and comparing partitional methods 
+(K-Means++, MiniBatch K-Means, and K-Medoids), continuous boundary edge weighting, and alternative community detection algorithms (Leiden, Infomap, and Spectral 
+Clustering) within the VillageNet pipeline, this research aims to identify the most accurate and stable architectural configuration for both public benchmark 
+datasets and real-world clinical trajectories of patients with Acute Myocardial Infarction (AMI).
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}
