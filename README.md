@@ -1,52 +1,39 @@
-# Análise de Variações Algorítmicas e Aprimoramento do VillageNet em Agrupamento Não Supervisionado
+# Analysis of Algorithmic Variations and Enhancement of VillageNet in Unsupervised Clustering
 
-**Autor:** Arthur Santos  
-**Instituição:** Departamento de Ciência da Computação (DCOMP) — Universidade Federal de São João del-Rei (UFSJ)
+**Author:** Arthur Santos  
+**Institution:** Department of Computer Science (DCOMP) — Federal University of São João del-Rei (UFSJ)
 
-## Sobre o Projeto
+## About the Project
 
-Este repositório contém a implementação modular e os experimentos da pesquisa voltada à investigação e otimização estrutural do algoritmo de agrupamento não supervisionado **VillageNet** (Ballal et al., 2026).
+This repository contains the modular implementation and experiments for research focused on investigating and structurally optimizing the **VillageNet** unsupervised clustering algorithm (Ballal et al., 2026).
 
-O objetivo central é avaliar se alterações nos módulos internos do algoritmo (Etapas 1, 3 e 4) conseguem superar a precisão, a estabilidade e o tempo de execução da formulação padrão em bases públicas de *benchmark* e em dados clínicos reais de pacientes com Infarto Agudo do Miocárdio (IAM).
+The main objective is to evaluate whether modifying the algorithm's internal modules (Steps 1, 3, and 4) can improve accuracy, stability, and runtime over the standard formulation across public benchmark datasets and real clinical data of patients with Acute Myocardial Infarction (AMI).
 
-## Variações Algorítmicas Investigadas
+## Investigated Algorithmic Variations
 
-* **Etapa 1 (Criação das Vilas / Células de Voronoi):**
-  * `kmeans_random` (Padrão do artigo: 1 inicialização aleatória)
+* **Step 1 (Village Creation / Voronoi Cells):**
+  * `kmeans_random` (Original paper default: single random initialization)
   * `kmeans++`
   * `minibatch` (MiniBatch K-Means)
-  * `kmedoids` (PAM — robustez a *outliers*)
-* **Etapa 3 (Ponderação das Arestas do Grafo Inter-Vilas $A_{UV}$):**
-  * `discrete` (Contagem simples original)
-  * `continuous` (Decaimento Gaussiano contínuo pela distância até a fronteira $\eta$)
-* **Etapa 4 (Detecção de Comunidades na Rede de Vilas):**
+  * `kmedoids` (PAM — robustness to *outliers*)
+* **Step 3 (Inter-Village Graph Edge Weighting $A_{UV}$):**
+  * `discrete` (Original simple count)
+  * `continuous` (Continuous Gaussian decay based on distance to boundary $\eta$)
+* **Step 4 (Community Detection on the Inter-Village Network):**
   * `leiden`
-  * `spectral` (Spectral Clustering com estimativa automática de $k$ via *eigengap*)
+  * `spectral` (Spectral Clustering with automatic $k$ estimation via *eigengap*)
   * `infomap`
   * `louvain_igraph`
 
-## Estrutura Principal
+## Main Structure
 
-* `src/experimentos_villagenet.ipynb`: Notebook principal contendo a classe `ModularVillageNet` e a bateria de experimentos nos *datasets* públicos (*Wine*, *Breast Cancer* e *Pen Digits*).
-* `DIARIO_DE_BORDO.md`: Registro semanal do progresso, resultados preliminares e próximos passos.
-* `requirements.txt`: Lista de dependências do projeto.
+* `villagenet_experiments.ipynb`: Main notebook containing the `ModularVillageNet` class and benchmark experiments on public datasets (*Wine*, *Breast Cancer*, and *Pen Digits*).
+* `updates.md`: Weekly log of progress, preliminary results, and next steps.
+* `requirements.txt`: Project dependencies list.
 
-## Como Executar Localmente
+## How to Run Locally
 
-1. Crie e ative um ambiente virtual Python:
+1. Create and activate a Python virtual environment:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
-   ```
-2. Instale as dependências:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Abra e execute o notebook `experimentos_villagenet.ipynb` no VS Code ou Jupyter Lab.
-
-## Principais Referências
-
-1. **BALLAL, A. et al.** VillageNet: Graph-based, Easily-interpretable, Unsupervised Clustering for Broad Biomedical Applications. *arXiv preprint arXiv:2501.10471v2*, 2026.
-2. **TRAAG, V. A.; WALTMAN, L.; VAN ECK, N. J.** From Louvain to Leiden: guaranteeing well-connected communities. *Scientific Reports*, v. 9, n. 5233, 2019.
-3. **DHILLON, I. S.; GUAN, Y.; KULIS, B.** Kernel k-means: Spectral clustering and normalized cuts. *Proceedings of the Tenth ACM SIGKDD*, p. 551–556, 2004.
-4. **NG, R. T.; HAN, J.** CLARANS: a method for clustering objects for spatial data mining. *IEEE Transactions on Knowledge and Data Engineering*, v. 14, n. 5, p. 1003–1016, 2002.
