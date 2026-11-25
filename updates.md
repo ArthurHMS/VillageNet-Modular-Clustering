@@ -1,5 +1,5 @@
 **Researcher:** Arthur Santos (DCOMP - UFSJ)  
-**Repository:** [Modular Evaluation and Enhancement of VillageNet for Unsupervised Clustering](https://github.com/ArthurHMS/Modular-Evaluation-and-Enhancement-of-VillageNet-for-Unsupervised-Clustering)
+**Repository:** [Modular Evaluation and Enhancement of VillageNet for Unsupervised Clustering](https://github.com/ArthurHMS/VillageNet-Modular-Clustering)
 
 ---
 
